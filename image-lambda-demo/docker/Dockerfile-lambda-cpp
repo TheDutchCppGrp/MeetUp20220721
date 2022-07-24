@@ -1,0 +1,16 @@
+FROM hk/aws-cpp-clang:14.0.4
+
+ARG CC=/usr/local/bin/clang
+ARG CXX=/usr/local/bin/clang++
+
+RUN curl -LO https://github.com/awslabs/aws-lambda-cpp/archive/v0.2.7.zip && \
+    unzip v0.2.7.zip && \
+    cd aws-lambda-cpp-0.2.7 && \
+    mkdir build && \
+    cd build && \
+    cmake .. -DCMAKE_BUILD_TYPE=Release && \
+    make && \
+    make install && \
+    cd ../.. && \
+    rm v0.2.7.zip && \
+    rm -rf aws-lambda-cpp-0.2.7
